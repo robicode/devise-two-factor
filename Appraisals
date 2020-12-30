@@ -17,3 +17,8 @@ appraise "rails-5-1" do
   gem 'railties', '~> 5.1'
   gem 'activesupport', '~> 5.1'
 end
+
+appraise "rails-6-0" do
+  gem 'railties', '~> 6.0.3', '>= 6.0.3.4'
+  gem 'activesupport', '~> 6.0.3', '>= 6.0.3.4'
+end
