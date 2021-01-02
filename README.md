@@ -1,3 +1,23 @@
+# About This Fork
+
+This is my fork of [Tinfoil Security's](https://www.tinfoilsecurity.com/) Devise Two Factor gem for Ruby/Rails. The goal is to bring the gem and its dependencies current with recent gem versions, since the original has not been updated in quite some time.
+
+What is done:
+* Bumped the max Rails version to ~> 6.1. I ran Appraisal against the official repo and all tests passed with Rails 6.1, so I don't see why not...
+* Bumped ROTP to ~> 6.2. This broke a total of 12 tests.
+
+What needs to be done:
+* Switching from ROTP v2 to v6 broke a total of 12 tests, as I said above. I have fixed all but two. They were trivially fixed by removing the boolean parameters in the tests that tested drift functionality as ROTP does not take them anymore. The remaining two tests are related to the OTP provisioning URI.
+
+Somewhere between v2 and v6.2, the ROTP gem switched their OTP URI format, e.g. from one test run:
+
+- otpauth://totp/kirby.leannon@gulgowski.net?secret=yylxpkvcgltlpdnmu3banftd&issuer=Tinfoil
++ otpauth://totp/Tinfoil:kirby.leannon@gulgowski.net?secret=yylxpkvcgltlpdnmu3banftd&issuer=Tinfoil
+
+If you are worried about these two tests, you could either 1) copy the code from ROTP v2 and use that to generate your URIs, or 2) update the tests to just pass with the new strings. I'm not going to bother with it right now, as my authenticators work fine (orpclient on Linux desktop and Authy on Android) and I have more important things to do :)
+
+What follows is the original README from Tinfoil Security.
+
 # Devise-Two-Factor Authentication
 By [Tinfoil Security](https://www.tinfoilsecurity.com/). Interested in [working with us](https://www.tinfoilsecurity.com/jobs)? We're hiring!
 
